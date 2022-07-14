@@ -10,6 +10,7 @@ const egress = [
 
 let loadApp = () => {
     loadheadboard();
+    loadIncome();
 }
 let totalIncome = () => {
     let totalEntry = 0;
@@ -30,16 +31,40 @@ let totalEgresses = () => {
 let loadheadboard = () => {
     let budget = totalIncome() - totalEgresses();
     let percentageEgress = totalEgresses()/totalIncome();
-    document.getElementById('budget').innerHTML = coinFormat(budget);
+    document.getElementById('budget').innerHTML = currencyFormat(budget);
     document.getElementById('percentage').innerHTML = percentageFormat(percentageEgress);
-    document.getElementById('income').innerHTML = coinFormat(totalIncome());
-    document.getElementById('egress').innerHTML = coinFormat(totalEgresses());
+    document.getElementById('income').innerHTML = currencyFormat(totalIncome());
+    document.getElementById('egress').innerHTML = currencyFormat(totalEgresses());
 }
 
-const coinFormat = (value) => {
+const currencyFormat = (value) => {
     return value.toLocaleString('en-US',{style:'currency', currency: 'USD', minimumFractionDigits:2});
 }
 
 const percentageFormat = (value) => {
     return value.toLocaleString('en-US',{style: 'percent', minimumFractionDigits:2})
+}
+
+const loadIncome = () => {
+    let incomeHTML = '';
+    for(let entry of income){
+        incomeHTML += createIncomeHTML(entry);
+    }
+    document.getElementById('list-income').innerHTML = incomeHTML;
+}
+const createIncomeHTML = (entry) => {
+    let incomeHTML = `
+    <div class="element clearStyles">
+    <div class="element_description">${entry.description}</div>
+    <div class="right clearStyles">
+        <div class="element_value">${currencyFormat(entry.value)}</div>
+        <div class="element_delet">
+            <button class="element_delet--btn">
+                <ion-icon name='close-circle-outline'></ion-icon>
+            </button>
+        </div>
+    </div>
+</div>
+    `;
+    return incomeHTML;
 }
