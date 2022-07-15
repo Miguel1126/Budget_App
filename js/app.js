@@ -111,3 +111,21 @@ const deleteEgress = (id) => {
     loadHeadboard();
     loadEgresses();
 }
+
+let addData = () => {
+    let form = document.forms['form'];
+    let type = form['type'];
+    let description = form['description'];
+    let value = form['value'];
+    if(description.value !== '' && value.value !== ''){
+        if(type.value === 'income'){
+            income.push(new Income(description.value, +value.value));
+            loadHeadboard();
+            loadIncome();
+        }else if(type.value === 'egresses'){
+            egresses.push(new Egress(description.value, +value.value));
+            loadHeadboard();
+            loadEgresses();
+        }
+    }
+}
