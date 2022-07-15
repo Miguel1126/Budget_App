@@ -2,15 +2,17 @@ const income = [
     new Income('Salario', 2100.00),
     new Income('Venta conche', 1500.00)
 ];
+console.log(income);
 
 const egresses = [
     new Egress('Renta departamento', 900.00),
     new Egress('Ropa', 400.00),
     new Egress('Gastos operativos',1000.00)
 ];
+console.log(egresses);
 
 let loadApp = () => {
-    loadheadboard();
+    loadHeadboard();
     loadIncome();
     loadEgresses();
     
@@ -31,7 +33,7 @@ let totalEgresses = () => {
     return totalEgress;
 
 }
-let loadheadboard = () => {
+let loadHeadboard = () => {
     let budget = totalIncome() - totalEgresses();
     let percentageEgress = totalEgresses()/totalIncome();
     document.getElementById('budget').innerHTML = currencyFormat(budget);
@@ -61,9 +63,9 @@ const createIncomeHTML = (entry) => {
     <div class="element_description">${entry.description}</div>
     <div class="right clearStyles">
         <div class="element_value">${currencyFormat(entry.value)}</div>
-        <div class="element_delet">
-            <button class="element_delet--btn">
-                <ion-icon name='close-circle-outline'></ion-icon>
+        <div class="element_delete">
+            <button class="element_delete--btn">
+                <ion-icon name='close-circle-outline' onclick="deleteIncome(${income.id})"></ion-icon>
             </button>
         </div>
     </div>
@@ -71,6 +73,14 @@ const createIncomeHTML = (entry) => {
     `;
     return incomeHTML;
 }
+
+const deleteIncome = (id) => {
+    let indexDelete = income.findIndex(income => {income.id === id});
+    income.splice(indexDelete, 1);
+    loadHeadboard();
+    loadIncome();
+}
+
 const loadEgresses = () => {
     let egressesHTML = '';
     for(let egress of egresses){
@@ -85,8 +95,8 @@ const createEgressesHTML = (egress) => {
     <div class="right clearStyles">
         <div class="element_value">- ${currencyFormat(egress.value)}</div>
         <div class="element_percentage">${percentageFormat(egress.value/totalEgresses())}</div>
-        <div class="element_delet">
-            <button class="element_delet--btn">
+        <div class="element_delete">
+            <button class="element_delete--btn">
                 <ion-icon name='close-circle-outline'></ion-icon>
             </button>
         </div>

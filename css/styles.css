@@ -23,7 +23,7 @@ body {
 .red { color: #FF5049 !important; }
 .redfocus:focus { border: 1px solid #FF5049 !important; }
 
-.headboard {
+.headBoard {
     height: 40vh;
     background-size: cover;
     background-position: center;
@@ -224,22 +224,22 @@ h2 {
 }
 
 .income .element_value,
-.income .element_delet--btn {
+.income .element_delete--btn {
     color: #28B9B5;
 }
 
 .egress .element_value,
 .egress .element_percentage,
-.egress .element_delet--btn {
+.egress .element_delete--btn {
     color: #FF5049;
 }
 
 
-.element_delet {
+.element_delete {
     float: left;
 }
 
-.element_delet--btn {
+.element_delete--btn {
     font-size: 22px;
     background: none;
     border: none;
@@ -250,9 +250,9 @@ h2 {
     display: none;
 }
 
-.element_delet--btn:focus { outline: none; }
-.element_delet--btn:active { transform: translateY(2px); }
+.element_delete--btn:focus { outline: none; }
+.element_delete--btn:active { transform: translateY(2px); }
 
-.element:hover .element_delet--btn { display: block; }
+.element:hover .element_delete--btn { display: block; }
 .element:hover .element_value { transform: translateX(-20px); }
 .element:hover .element_percentage { transform: translateX(-20px); }
