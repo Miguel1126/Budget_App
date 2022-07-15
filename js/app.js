@@ -97,11 +97,17 @@ const createEgressesHTML = (egress) => {
         <div class="element_percentage">${percentageFormat(egress.value/totalEgresses())}</div>
         <div class="element_delete">
             <button class="element_delete--btn">
-                <ion-icon name='close-circle-outline'></ion-icon>
+                <ion-icon name='close-circle-outline' onclick="deleteEgress(${egresses.id})"></ion-icon>
             </button>
         </div>
     </div>
 </div>
     `;
     return egressesHTML;
+}
+const deleteEgress = (id) => {
+    let indexDelete = egresses.findIndex(egresses => {egresses.id === id});
+    egresses.splice(indexDelete, 1);
+    loadHeadboard();
+    loadEgresses();
 }
