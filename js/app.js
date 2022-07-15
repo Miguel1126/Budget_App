@@ -3,14 +3,17 @@ const income = [
     new Income('Venta conche', 1500.00)
 ];
 
-const egress = [
+const egresses = [
     new Egress('Renta departamento', 900.00),
-    new Egress('Ropa', 400.00)
+    new Egress('Ropa', 400.00),
+    new Egress('Gastos operativos',1000.00)
 ];
 
 let loadApp = () => {
     loadheadboard();
     loadIncome();
+    loadEgresses();
+    
 }
 let totalIncome = () => {
     let totalEntry = 0;
@@ -22,8 +25,8 @@ let totalIncome = () => {
 
 let totalEgresses = () => {
     let totalEgress = 0;
-    for(let output of egress){
-        totalEgress += output.value;
+    for(let egress of egresses){
+        totalEgress += egress.value;
     }
     return totalEgress;
 
@@ -67,4 +70,28 @@ const createIncomeHTML = (entry) => {
 </div>
     `;
     return incomeHTML;
+}
+const loadEgresses = () => {
+    let egressesHTML = '';
+    for(let egress of egresses){
+        egressesHTML += createEgressesHTML(egress);
+    }
+    document.getElementById('list-egress').innerHTML = egressesHTML;
+}
+const createEgressesHTML = (egress) => {
+    let egressesHTML = `
+    <div class="element clearStyles">
+    <div class="element_description">${egress.description}</div>
+    <div class="right clearStyles">
+        <div class="element_value">- ${currencyFormat(egress.value)}</div>
+        <div class="element_percentage">${percentageFormat(egress.value/totalEgresses())}</div>
+        <div class="element_delet">
+            <button class="element_delet--btn">
+                <ion-icon name='close-circle-outline'></ion-icon>
+            </button>
+        </div>
+    </div>
+</div>
+    `;
+    return egressesHTML;
 }
